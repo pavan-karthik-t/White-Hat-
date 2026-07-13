@@ -49,8 +49,22 @@ No build tools or frameworks are required.
 
 ```text
 .
+├── .github/
+│   └── workflows/
+│       └── deploy-pages.yml
 ├── README.md
+├── index.html
 └── whitehat-landing.html
+```
+
+## Live Deployment
+
+This repository is prepared for deployment with **GitHub Pages** using a GitHub Actions workflow.
+
+Expected live URL:
+
+```text
+https://pavan-karthik-t.github.io/White-Hat-/
 ```
 
 ## Run Locally
@@ -88,4 +102,3 @@ White Hat is positioned as:
 
 **Pavan Karthik Tummepalli**  
 Founder · Product Designer · Frontend Developer
-
