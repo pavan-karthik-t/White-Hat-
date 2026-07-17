@@ -8,6 +8,7 @@ const PORT = Number(process.env.PORT || 3000);
 const rootDir = __dirname;
 const publicDir = path.join(rootDir, "public");
 const dataDir = path.join(rootDir, "data");
+const isVercelRuntime = process.env.VERCEL === "1";
 
 const dataFiles = {
   chefs: path.join(dataDir, "chefs.json"),
@@ -36,6 +37,10 @@ async function readJson(filePath) {
 
 async function writeJson(filePath, value) {
   await fsp.writeFile(filePath, `${JSON.stringify(value, null, 2)}\n`, "utf8");
+}
+
+function canPersistLeads() {
+  return !isVercelRuntime;
 }
 
 function sendJson(response, statusCode, payload) {
@@ -160,7 +165,6 @@ async function handleApi(request, response, requestUrl) {
       return true;
     }
 
-    const leads = await readJson(dataFiles.leads);
     const nextLead = {
       id: `lead_${Date.now()}`,
       name: String(body.name).trim(),
@@ -171,11 +175,21 @@ async function handleApi(request, response, requestUrl) {
       createdAt: new Date().toISOString()
     };
 
-    leads.unshift(nextLead);
-    await writeJson(dataFiles.leads, leads);
+    let message = "Lead captured successfully.";
+    let storage = "local-json";
+
+    if (canPersistLeads()) {
+      const leads = await readJson(dataFiles.leads);
+      leads.unshift(nextLead);
+      await writeJson(dataFiles.leads, leads);
+    } else {
+      message = "Lead captured in Vercel demo mode. Connect a database or form backend for permanent storage.";
+      storage = "transient";
+    }
 
     sendJson(response, 201, {
-      message: "Lead captured successfully.",
+      message,
+      storage,
       lead: nextLead
     });
     return true;
@@ -206,14 +220,19 @@ async function serveStatic(requestUrl, response) {
   }
 }
 
-function createServer() {
-  return http.createServer(async (request, response) => {
+function createRequestHandler({ serveStaticFiles }) {
+  return async (request, response) => {
     try {
       const requestUrl = new URL(request.url, `http://${request.headers.host || "localhost"}`);
       const handled = await handleApi(request, response, requestUrl);
 
-      if (!handled) {
+      if (!handled && serveStaticFiles) {
         await serveStatic(requestUrl, response);
+        return;
+      }
+
+      if (!handled) {
+        sendText(response, 404, "Not Found");
       }
     } catch (error) {
       const message = error instanceof Error ? error.message : "Unexpected server error";
@@ -222,7 +241,11 @@ function createServer() {
         error: message
       });
     }
-  });
+  };
+}
+
+function createServer() {
+  return http.createServer(createRequestHandler({ serveStaticFiles: true }));
 }
 
 if (require.main === module) {
@@ -232,5 +255,7 @@ if (require.main === module) {
 }
 
 module.exports = {
+  canPersistLeads,
+  createRequestHandler,
   createServer
 };
