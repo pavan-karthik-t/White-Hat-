@@ -1,8 +1,8 @@
 {
   "hero": {
-    "eyebrow": "",
-    "headline": "A professional Indian hospitality platform designed with monumentality, ritual rhythm, and modern product clarity.",
-    "subheadline": "White Hat is a full-stack culinary hiring and reputation platform shaped by South Indian temple geometry, stone-and-brass material cues, and a refined red-line interface system."
+    "eyebrow": "AI hiring and skill development for India's kitchens",
+    "headline": "The hat is earned. Not issued.",
+    "subheadline": "White Hat helps India's informal culinary workforce get discovered fairly through AI station-fit matching, profile-building support, and chef-side readiness coaching."
   },
   "stats": [
     {
@@ -23,23 +23,23 @@
     }
   ],
   "highlights": [
-    "Scarlet line highlights direct attention across the interface like a ceremonial axis",
-    "Temple-inspired hierarchy gives the website a stronger Indian identity without hurting usability",
-    "Chef discovery, learning, trust signals, and intake remain fully connected to the backend",
-    "Premium visual language built to present Indian culture in a polished professional format"
+    "AI station-fit search ranks chefs from a natural-language kitchen brief instead of relying on exact matches alone",
+    "Chef-side profile drafting turns informal kitchen stories into structured, reviewable profile data",
+    "Readiness scoring gives workers specific coaching on how to become more discoverable and hireable",
+    "The platform keeps White Hat's premium Indian visual language while making AI functional at the workflow core"
   ],
   "businessSignals": [
     {
-      "title": "Culture-rooted interface",
-      "body": "The experience represents India through form, pattern, material, and rhythm instead of using generic startup design tropes."
+      "title": "Fairer chef discovery",
+      "body": "Employers can describe the real kitchen need in plain language and still surface strong blue-collar talent without polished resumes."
     },
     {
-      "title": "Red-line navigation system",
-      "body": "Scarlet highlights, rails, and sectional thresholds guide movement clearly while making the page feel custom and memorable."
+      "title": "Skill-development evidence",
+      "body": "Every chef can convert informal work history into structured proof, then get coaching on what to add next for better visibility."
     },
     {
-      "title": "Full-stack credibility",
-      "body": "The design is bold, but the product remains practical with live filters, structured data, and backend-connected lead capture."
+      "title": "Full-stack deployability",
+      "body": "Semantic matching, profile extraction, explanations, and readiness feedback all run through real API routes that deploy on Vercel."
     }
   ]
 }

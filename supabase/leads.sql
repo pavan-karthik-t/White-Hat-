@@ -5,5 +5,8 @@ create table if not exists public.leads (
   role text not null,
   interest text not null,
   message text not null default '',
+  chef_story text not null default '',
+  structured_profile jsonb,
+  readiness_snapshot jsonb,
   created_at timestamptz not null default now()
 );

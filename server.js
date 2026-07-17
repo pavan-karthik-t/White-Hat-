@@ -3,6 +3,7 @@ const fs = require("node:fs");
 const fsp = require("node:fs/promises");
 const path = require("node:path");
 const { URL } = require("node:url");
+const { evaluateReadiness, extractProfileDraft, getAiConfig, rankChefs } = require("./ai");
 
 const PORT = Number(process.env.PORT || 3000);
 const rootDir = __dirname;
@@ -69,6 +70,21 @@ async function persistLeadToSupabase(lead) {
   }
 }
 
+function mapLeadForSupabase(lead) {
+  return {
+    id: lead.id,
+    name: lead.name,
+    email: lead.email,
+    role: lead.role,
+    interest: lead.interest,
+    message: lead.message,
+    created_at: lead.createdAt,
+    chef_story: lead.chefStory || "",
+    structured_profile: lead.structuredProfile || null,
+    readiness_snapshot: lead.readinessSnapshot || null
+  };
+}
+
 function sendJson(response, statusCode, payload) {
   response.writeHead(statusCode, {
     "Content-Type": "application/json; charset=utf-8",
@@ -133,11 +149,25 @@ function buildChefOptions(chefs) {
   };
 }
 
+function normalizeProfilePayload(body) {
+  return {
+    freeText: String(body.chefStory || body.freeText || "").trim(),
+    cuisines: Array.isArray(body.cuisines) ? body.cuisines : String(body.cuisines || "").split(",").map((item) => item.trim()).filter(Boolean),
+    stations: Array.isArray(body.stations) ? body.stations : String(body.stations || "").split(",").map((item) => item.trim()).filter(Boolean),
+    yearsOfExperience: Number(body.yearsOfExperience || body.experienceYears || 0),
+    citiesWorked: Array.isArray(body.citiesWorked) ? body.citiesWorked : String(body.citiesWorked || "").split(",").map((item) => item.trim()).filter(Boolean),
+    serviceTypes: Array.isArray(body.serviceTypes) ? body.serviceTypes : String(body.serviceTypes || "").split(",").map((item) => item.trim()).filter(Boolean),
+    availabilityType: String(body.availabilityType || "").trim(),
+    summary: String(body.summary || "").trim()
+  };
+}
+
 async function handleApi(request, response, requestUrl) {
   if (request.method === "GET" && requestUrl.pathname === "/api/health") {
     sendJson(response, 200, {
       status: "ok",
-      date: new Date().toISOString()
+      date: new Date().toISOString(),
+      ai: getAiConfig()
     });
     return true;
   }
@@ -150,7 +180,8 @@ async function handleApi(request, response, requestUrl) {
 
     sendJson(response, 200, {
       ...overview,
-      filterOptions: buildChefOptions(chefs)
+      filterOptions: buildChefOptions(chefs),
+      ai: getAiConfig()
     });
     return true;
   }
@@ -191,6 +222,17 @@ async function handleApi(request, response, requestUrl) {
       return true;
     }
 
+    const structuredProfile = body.structuredProfile ? {
+      ...normalizeProfilePayload(body.structuredProfile),
+      source: body.structuredProfile.source || "client-review"
+    } : null;
+    const readinessSnapshot = body.readinessSnapshot ? {
+      readinessScore: Number(body.readinessSnapshot.readinessScore || 0),
+      readinessLabel: String(body.readinessSnapshot.readinessLabel || "").trim(),
+      suggestions: Array.isArray(body.readinessSnapshot.suggestions) ? body.readinessSnapshot.suggestions : [],
+      source: String(body.readinessSnapshot.source || "client-review").trim()
+    } : null;
+
     const nextLead = {
       id: `lead_${Date.now()}`,
       name: String(body.name).trim(),
@@ -198,6 +240,9 @@ async function handleApi(request, response, requestUrl) {
       role: String(body.role).trim(),
       interest: String(body.interest).trim(),
       message: String(body.message || "").trim(),
+      chefStory: String(body.chefStory || "").trim(),
+      structuredProfile,
+      readinessSnapshot,
       createdAt: new Date().toISOString()
     };
 
@@ -205,7 +250,7 @@ async function handleApi(request, response, requestUrl) {
     let storage = "local-json";
 
     if (hasSupabaseLeadStorage()) {
-      await persistLeadToSupabase(nextLead);
+      await persistLeadToSupabase(mapLeadForSupabase(nextLead));
       message = "Lead captured successfully in Supabase.";
       storage = "supabase";
     } else if (canPersistLeads()) {
@@ -221,6 +266,50 @@ async function handleApi(request, response, requestUrl) {
       message,
       storage,
       lead: nextLead
+    });
+    return true;
+  }
+
+  if (request.method === "POST" && requestUrl.pathname === "/api/chef-match") {
+    const rawBody = await collectRequestBody(request);
+    const body = JSON.parse(rawBody || "{}");
+    const chefs = await readJson(dataFiles.chefs);
+    const payload = await rankChefs({
+      query: String(body.query || "").trim(),
+      filters: body.filters || {},
+      chefs
+    });
+
+    sendJson(response, 200, payload);
+    return true;
+  }
+
+  if (request.method === "POST" && requestUrl.pathname === "/api/profile-draft") {
+    const rawBody = await collectRequestBody(request);
+    const body = JSON.parse(rawBody || "{}");
+    const chefs = await readJson(dataFiles.chefs);
+    const structuredProfile = await extractProfileDraft(String(body.freeText || ""), chefs);
+    const readinessSnapshot = await evaluateReadiness({
+      ...structuredProfile,
+      freeText: String(body.freeText || "").trim()
+    });
+
+    sendJson(response, 200, {
+      structuredProfile,
+      readinessSnapshot,
+      ai: getAiConfig()
+    });
+    return true;
+  }
+
+  if (request.method === "POST" && requestUrl.pathname === "/api/profile-readiness") {
+    const rawBody = await collectRequestBody(request);
+    const body = JSON.parse(rawBody || "{}");
+    const readinessSnapshot = await evaluateReadiness(normalizeProfilePayload(body));
+
+    sendJson(response, 200, {
+      readinessSnapshot,
+      ai: getAiConfig()
     });
     return true;
   }

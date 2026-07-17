@@ -5,13 +5,17 @@
     "title": "Executive Chef",
     "city": "Chennai",
     "cuisines": ["Chettinad", "South Indian", "Banquet"],
+    "stations": ["Banquet", "Bulk Production", "Menu Development", "Hot Section"],
+    "citiesWorked": ["Chennai", "Coimbatore", "Madurai"],
     "serviceTypes": ["Full-time", "Hourly", "Events"],
     "availability": "Available this week",
+    "availabilityType": "This Week",
     "experienceYears": 11,
     "priceLabel": "INR 2,500 / hour",
     "rating": 4.9,
     "verifiedBookings": 148,
-    "summary": "Leads high-volume banquet kitchens with strong systems for wedding service, chef hiring, and premium traditional menus."
+    "summary": "Leads high-volume banquet kitchens with strong systems for wedding service, chef hiring, and premium traditional menus.",
+    "profileNarrative": "Started on the hot line in Chettinad kitchens and now leads wedding banquet brigades handling 2,000-plus guest service, menu planning, and junior-chef training."
   },
   {
     "id": "chef-arjun-rao",
@@ -19,13 +23,17 @@
     "title": "Sous Chef",
     "city": "Hyderabad",
     "cuisines": ["Hyderabadi", "Biryani", "Tandoor"],
+    "stations": ["Tandoor", "Biryani", "Bulk Production", "Night Service"],
+    "citiesWorked": ["Hyderabad", "Secunderabad"],
     "serviceTypes": ["Events", "Seasonal", "Night Shift"],
     "availability": "Open within 48 hours",
+    "availabilityType": "Immediate",
     "experienceYears": 6,
     "priceLabel": "INR 1,900 / hour",
     "rating": 4.8,
     "verifiedBookings": 92,
-    "summary": "Trusted for biryani production, tandoor execution, and short-notice event staffing across hotels and high-pressure kitchens."
+    "summary": "Trusted for biryani production, tandoor execution, and short-notice event staffing across hotels and high-pressure kitchens.",
+    "profileNarrative": "Built his reputation through banquet-volume biryani and tandoor service for hotels, weddings, and overnight event kitchens that need fast setup and reliable output."
   },
   {
     "id": "chef-meera-menon",
@@ -33,13 +41,17 @@
     "title": "Private Chef",
     "city": "Kochi",
     "cuisines": ["Kerala", "Private Dining", "Sadya"],
+    "stations": ["Private Dining", "Cold Section", "Menu Development", "Dessert"],
+    "citiesWorked": ["Kochi", "Thiruvananthapuram", "Bengaluru"],
     "serviceTypes": ["Private Dining", "Events", "Luxury Homes"],
     "availability": "Booked two weeks out",
+    "availabilityType": "Next Week",
     "experienceYears": 9,
     "priceLabel": "INR 3,200 / service",
     "rating": 4.7,
     "verifiedBookings": 81,
-    "summary": "Designs intimate premium dining experiences with Kerala craft, pacing discipline, and guest-forward service for private hosts."
+    "summary": "Designs intimate premium dining experiences with Kerala craft, pacing discipline, and guest-forward service for private hosts.",
+    "profileNarrative": "Specializes in curated private dining menus, luxury home service, and Kerala tasting experiences with a strong focus on guest flow and plated finishing."
   },
   {
     "id": "chef-zoya-khan",
@@ -47,13 +59,17 @@
     "title": "Pastry Lead",
     "city": "Mumbai",
     "cuisines": ["Pastry", "Desserts", "Cafe"],
+    "stations": ["Pastry", "Bakery", "Dessert", "Launch Support"],
+    "citiesWorked": ["Mumbai", "Pune"],
     "serviceTypes": ["Full-time", "Consulting", "Launch Support"],
     "availability": "Available next Monday",
+    "availabilityType": "Next Week",
     "experienceYears": 8,
     "priceLabel": "INR 2,200 / hour",
     "rating": 4.9,
     "verifiedBookings": 107,
-    "summary": "Helps hotels and premium cafes launch dessert menus, pastry systems, and signature plated finishes with training support."
+    "summary": "Helps hotels and premium cafes launch dessert menus, pastry systems, and signature plated finishes with training support.",
+    "profileNarrative": "Leads pastry R and D, cafe dessert launches, and bakery operations with a mix of production discipline and team coaching for premium outlets."
   },
   {
     "id": "chef-raghav-singh",
@@ -61,13 +77,17 @@
     "title": "Resort Kitchen Manager",
     "city": "Jaipur",
     "cuisines": ["Rajasthani", "North Indian", "Resort Dining"],
+    "stations": ["Operations", "Banquet", "Menu Development", "Bulk Production"],
+    "citiesWorked": ["Jaipur", "Udaipur", "Jodhpur"],
     "serviceTypes": ["Full-time", "Resort", "Operations"],
     "availability": "Interviewing this month",
+    "availabilityType": "Interviewing",
     "experienceYears": 13,
     "priceLabel": "INR 18L annual expectation",
     "rating": 4.8,
     "verifiedBookings": 169,
-    "summary": "Built for properties that need kitchen leadership, cost control, wedding service, and large-format guest experience."
+    "summary": "Built for properties that need kitchen leadership, cost control, wedding service, and large-format guest experience.",
+    "profileNarrative": "Runs resort kitchens with ownership of banquet planning, cost control, vendor coordination, and brigade discipline for high-volume guest service."
   },
   {
     "id": "chef-neha-basu",
@@ -75,12 +95,16 @@
     "title": "Culinary Educator",
     "city": "Bengaluru",
     "cuisines": ["Modern Indian", "Training", "Corporate Dining"],
+    "stations": ["Training", "Menu Development", "Corporate Dining", "Operations"],
+    "citiesWorked": ["Bengaluru", "Mysuru", "Hyderabad"],
     "serviceTypes": ["Consulting", "Masterclasses", "Part-time"],
     "availability": "Open for August cohorts",
+    "availabilityType": "Part-time",
     "experienceYears": 10,
     "priceLabel": "INR 2,800 / session",
     "rating": 5,
     "verifiedBookings": 73,
-    "summary": "Pairs kitchen training with menu design and hospitality coaching for brands building polished teams and repeatable service."
+    "summary": "Pairs kitchen training with menu design and hospitality coaching for brands building polished teams and repeatable service.",
+    "profileNarrative": "Works with growing brands that need training systems, modern Indian menu structure, and repeatable kitchen coaching for young teams."
   }
 ]

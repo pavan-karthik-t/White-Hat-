@@ -81,9 +81,17 @@
           <div class="rail-rule"><span></span></div>
           <span class="eyebrow">Search by station</span>
           <h2>Hire the way a kitchen actually staffs.</h2>
-          <p>The live backend powers this search, so the redesign still works like a real product instead of a static concept.</p>
+          <p>The live backend powers this search, and the AI station-fit engine now turns kitchen briefs into ranked chef matches instead of exact-filter only results.</p>
         </div>
         <form class="search-panel" id="filterForm">
+          <div class="search-brief">
+            <label class="full-width">
+              <span>Kitchen brief</span>
+              <textarea id="semanticQuery" name="query" rows="3" placeholder="Need a tandoor specialist for banquet volume in Hyderabad, must be available weekends."></textarea>
+            </label>
+            <p class="search-helper">Start with plain language. The dropdown filters still work, but they now narrow an AI-ranked shortlist instead of replacing it.</p>
+            <p class="search-status" id="searchStatus" aria-live="polite"></p>
+          </div>
           <div class="search-row search-row-grid">
             <label>
               <span>City</span>
@@ -109,7 +117,7 @@
             </label>
           </div>
           <div class="search-actions">
-            <button class="btn btn-primary" type="submit">Search chefs</button>
+            <button class="btn btn-primary" type="submit">Rank chef matches</button>
             <button class="btn btn-outline" type="button" id="resetFilters">Reset filters</button>
           </div>
         </form>
@@ -254,6 +262,61 @@
               <option value="Partnership">Partnership</option>
             </select>
           </label>
+          <label class="full-width">
+            <span>Kitchen experience story</span>
+            <textarea name="chefStory" id="chefStory" rows="5" placeholder="If you are a chef, tell us about your station experience, cuisines, cities worked in, and the kind of roles you want next."></textarea>
+          </label>
+          <div class="full-width ai-intake-actions">
+            <button class="btn btn-outline" type="button" id="buildProfileDraft">Build AI profile draft</button>
+            <button class="btn btn-outline" type="button" id="refreshReadiness">Refresh readiness score</button>
+          </div>
+          <div class="full-width profile-review is-hidden" id="profileReview">
+            <div class="profile-review-head">
+              <div>
+                <span class="eyebrow">Chef-side review</span>
+                <h3>Review the structured profile before saving</h3>
+              </div>
+              <p id="profileDraftStatus">Add your kitchen story, then let the AI build a first draft you can edit.</p>
+            </div>
+            <div class="profile-grid">
+              <label>
+                <span>Cuisines</span>
+                <input type="text" id="profileCuisines" name="profileCuisines" placeholder="Chettinad, Banquet, South Indian">
+              </label>
+              <label>
+                <span>Stations</span>
+                <input type="text" id="profileStations" name="profileStations" placeholder="Tandoor, Grill, Pastry">
+              </label>
+              <label>
+                <span>Years of experience</span>
+                <input type="number" id="profileExperienceYears" name="profileExperienceYears" min="0" step="1">
+              </label>
+              <label>
+                <span>Cities worked in</span>
+                <input type="text" id="profileCitiesWorked" name="profileCitiesWorked" placeholder="Hyderabad, Secunderabad">
+              </label>
+              <label>
+                <span>Service types</span>
+                <input type="text" id="profileServiceTypes" name="profileServiceTypes" placeholder="Events, Full-time, Consulting">
+              </label>
+              <label>
+                <span>Suggested availability</span>
+                <input type="text" id="profileAvailabilityType" name="profileAvailabilityType" placeholder="Immediate">
+              </label>
+              <label class="full-width">
+                <span>AI profile summary</span>
+                <textarea id="profileSummary" name="profileSummary" rows="3" placeholder="Structured summary appears here."></textarea>
+              </label>
+            </div>
+            <div class="readiness-card" id="readinessCard">
+              <div class="readiness-top">
+                <span class="eyebrow">Kitchen-readiness score</span>
+                <strong id="readinessScore">--</strong>
+              </div>
+              <p id="readinessLabel">Complete the fields above to see coach-style feedback for chefs.</p>
+              <ul id="readinessSuggestions" class="readiness-suggestions"></ul>
+            </div>
+          </div>
           <label class="full-width">
             <span>Message</span>
             <textarea name="message" rows="4" placeholder="Share the city, culinary brief, hiring timeline, or type of collaboration you want."></textarea>
