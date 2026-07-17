@@ -42,6 +42,8 @@ No external dependencies are required.
 |   `-- styles.css
 |-- server.js
 |-- server.test.js
+|-- supabase/
+|   `-- leads.sql
 |-- vercel.json
 |-- whitehat-landing.html
 `-- README.md
@@ -98,9 +100,24 @@ To deploy:
 2. Keep the project root as the repository root.
 3. Leave the frontend as static and let Vercel serve the `public/` assets automatically.
 
+### Permanent lead storage on Vercel
+
+To store contact form submissions permanently after deployment, connect Supabase:
+
+1. Create a Supabase project.
+2. Run the schema in [supabase/leads.sql](D:/Projects/White%20Hat/supabase/leads.sql).
+3. Add these environment variables in Vercel:
+
+- `SUPABASE_URL`
+- `SUPABASE_SERVICE_ROLE_KEY`
+- `SUPABASE_LEADS_TABLE`
+
+`SUPABASE_LEADS_TABLE` is optional and defaults to `leads`.
+
 ## Notes
 
 - The original design exploration is preserved in `whitehat-landing.html`.
 - The new product experience is served from `public/index.html`.
 - Leads submitted through the contact form are stored locally in `data/leads.json` during local development.
-- On Vercel, lead submissions run in demo mode and are not permanently persisted until you connect a database or form backend.
+- On Vercel, lead submissions are stored in Supabase when the environment variables are configured.
+- If Supabase is not configured, Vercel falls back to demo-mode lead capture without permanent persistence.

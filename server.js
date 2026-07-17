@@ -9,6 +9,9 @@ const rootDir = __dirname;
 const publicDir = path.join(rootDir, "public");
 const dataDir = path.join(rootDir, "data");
 const isVercelRuntime = process.env.VERCEL === "1";
+const supabaseUrl = process.env.SUPABASE_URL || "";
+const supabaseServiceRoleKey = process.env.SUPABASE_SERVICE_ROLE_KEY || "";
+const supabaseLeadsTable = process.env.SUPABASE_LEADS_TABLE || "leads";
 
 const dataFiles = {
   chefs: path.join(dataDir, "chefs.json"),
@@ -41,6 +44,29 @@ async function writeJson(filePath, value) {
 
 function canPersistLeads() {
   return !isVercelRuntime;
+}
+
+function hasSupabaseLeadStorage() {
+  return Boolean(supabaseUrl && supabaseServiceRoleKey);
+}
+
+async function persistLeadToSupabase(lead) {
+  const endpoint = new URL(`/rest/v1/${supabaseLeadsTable}`, supabaseUrl).toString();
+  const response = await fetch(endpoint, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      apikey: supabaseServiceRoleKey,
+      Authorization: `Bearer ${supabaseServiceRoleKey}`,
+      Prefer: "return=minimal"
+    },
+    body: JSON.stringify([lead])
+  });
+
+  if (!response.ok) {
+    const details = await response.text().catch(() => "");
+    throw new Error(`Supabase lead storage failed${details ? `: ${details}` : ""}`);
+  }
 }
 
 function sendJson(response, statusCode, payload) {
@@ -178,7 +204,11 @@ async function handleApi(request, response, requestUrl) {
     let message = "Lead captured successfully.";
     let storage = "local-json";
 
-    if (canPersistLeads()) {
+    if (hasSupabaseLeadStorage()) {
+      await persistLeadToSupabase(nextLead);
+      message = "Lead captured successfully in Supabase.";
+      storage = "supabase";
+    } else if (canPersistLeads()) {
       const leads = await readJson(dataFiles.leads);
       leads.unshift(nextLead);
       await writeJson(dataFiles.leads, leads);
@@ -257,5 +287,7 @@ if (require.main === module) {
 module.exports = {
   canPersistLeads,
   createRequestHandler,
-  createServer
+  createServer,
+  hasSupabaseLeadStorage,
+  persistLeadToSupabase
 };
