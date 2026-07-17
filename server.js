@@ -278,16 +278,17 @@ function createServer() {
   return http.createServer(createRequestHandler({ serveStaticFiles: true }));
 }
 
+const vercelHandler = createRequestHandler({ serveStaticFiles: true });
+
 if (require.main === module) {
   createServer().listen(PORT, () => {
     console.log(`White Hat running at http://localhost:${PORT}`);
   });
 }
 
-module.exports = {
-  canPersistLeads,
-  createRequestHandler,
-  createServer,
-  hasSupabaseLeadStorage,
-  persistLeadToSupabase
-};
+module.exports = vercelHandler;
+module.exports.canPersistLeads = canPersistLeads;
+module.exports.createRequestHandler = createRequestHandler;
+module.exports.createServer = createServer;
+module.exports.hasSupabaseLeadStorage = hasSupabaseLeadStorage;
+module.exports.persistLeadToSupabase = persistLeadToSupabase;
