@@ -1,0 +1,45 @@
+{
+  "hero": {
+    "eyebrow": "",
+    "headline": "A professional Indian hospitality platform designed with monumentality, ritual rhythm, and modern product clarity.",
+    "subheadline": "White Hat is a full-stack culinary hiring and reputation platform shaped by South Indian temple geometry, stone-and-brass material cues, and a refined red-line interface system."
+  },
+  "stats": [
+    {
+      "value": "18,400+",
+      "label": "chef profiles across India"
+    },
+    {
+      "value": "4,200+",
+      "label": "kitchens actively hiring"
+    },
+    {
+      "value": "41,000+",
+      "label": "verified meals and bookings completed"
+    },
+    {
+      "value": "90+",
+      "label": "regional cuisines represented"
+    }
+  ],
+  "highlights": [
+    "Scarlet line highlights direct attention across the interface like a ceremonial axis",
+    "Temple-inspired hierarchy gives the website a stronger Indian identity without hurting usability",
+    "Chef discovery, learning, trust signals, and intake remain fully connected to the backend",
+    "Premium visual language built to present Indian culture in a polished professional format"
+  ],
+  "businessSignals": [
+    {
+      "title": "Culture-rooted interface",
+      "body": "The experience represents India through form, pattern, material, and rhythm instead of using generic startup design tropes."
+    },
+    {
+      "title": "Red-line navigation system",
+      "body": "Scarlet highlights, rails, and sectional thresholds guide movement clearly while making the page feel custom and memorable."
+    },
+    {
+      "title": "Full-stack credibility",
+      "body": "The design is bold, but the product remains practical with live filters, structured data, and backend-connected lead capture."
+    }
+  ]
+}

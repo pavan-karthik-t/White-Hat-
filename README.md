@@ -1,104 +1,87 @@
 # White Hat
 
-Premium landing page concept for **White Hat**, India's professional platform for culinary talent.
+Full-stack prototype for **White Hat**, a premium Indian culinary talent platform for chefs, restaurants, hotels, event hosts, and hospitality operators.
 
-## Overview
+## What changed
 
-White Hat is envisioned as a modern platform built for the culinary industry across India, bringing together:
+This repository started as a premium single-page landing concept. It has now been extended into a working full-stack prototype with:
 
-- chef portfolios
-- verified hiring
-- hourly and event bookings
-- reputation and reviews
-- culinary learning and masterclasses
+- a Node.js backend
+- API endpoints for chefs, overview metrics, masterclasses, testimonials, and lead capture
+- a dynamic frontend powered by `fetch`
+- live chef filtering by city, cuisine, service type, and availability
+- persisted form submissions written to `data/leads.json`
 
-This repository contains a polished single-page landing experience designed to present the brand with a premium, editorial, and culturally grounded visual language.
+## Stack
 
-## Design Direction
-
-The landing page blends:
-
-- modern startup clarity
-- Indian architectural influence
-- warm culinary storytelling
-- luxury editorial spacing and typography
-
-The result is a front page that feels more like a funded premium brand than a generic template.
-
-## Highlights
-
-- Strong hero section with trust-focused messaging
-- Premium search experience for chefs and culinary hiring
-- Food-first chef profile cards
-- Social proof and platform metrics
-- Hospitality-driven workflow section
-- Learning and masterclass showcase
-- Responsive layout for desktop, tablet, and mobile
-- Accessibility-minded structure and focus states
-- SEO-ready meta tags and social metadata
-
-## Tech Stack
-
-- `HTML5`
-- `CSS3`
+- `Node.js`
+- `HTML`
+- `CSS`
 - `Vanilla JavaScript`
+- built-in `node:test` for API verification
 
-No build tools or frameworks are required.
+No external dependencies are required.
 
-## Project Structure
+## Project structure
 
 ```text
 .
-├── .github/
-│   └── workflows/
-│       └── deploy-pages.yml
-├── README.md
-├── index.html
-└── whitehat-landing.html
+|-- .github/
+|-- data/
+|   |-- chefs.json
+|   |-- leads.json
+|   |-- masterclasses.json
+|   |-- overview.json
+|   `-- testimonials.json
+|-- public/
+|   |-- app.js
+|   |-- index.html
+|   `-- styles.css
+|-- server.js
+|-- server.test.js
+|-- whitehat-landing.html
+`-- README.md
 ```
 
-## Live Deployment
+## Run locally
 
-This repository is prepared for deployment with **GitHub Pages** using a GitHub Actions workflow.
-
-Expected live URL:
-
-```text
-https://pavan-karthik-t.github.io/White-Hat-/
-```
-
-## Run Locally
-
-Open the file directly in a browser, or serve it locally with a simple static server.
-
-Example using Python:
+Start the prototype:
 
 ```bash
-python -m http.server 8080
+npm start
 ```
 
-Then visit:
+Then open:
 
 ```text
-http://127.0.0.1:8080/whitehat-landing.html
+http://localhost:3000
 ```
 
-## Brand Positioning
+## API endpoints
 
-White Hat is positioned as:
+- `GET /api/health`
+- `GET /api/overview`
+- `GET /api/chefs`
+- `GET /api/masterclasses`
+- `GET /api/testimonials`
+- `POST /api/leads`
 
-- the professional home for chefs
-- a trusted hiring platform for restaurants, hotels, and hosts
-- a portfolio and reputation layer for culinary careers
-- a premium Indian hospitality brand with modern product thinking
+Example filter request:
+
+```text
+/api/chefs?city=Chennai&cuisine=Chettinad
+```
+
+## Test
+
+Run the API checks:
+
+```bash
+npm test
+```
 
 ## Notes
 
-- The design uses a single self-contained HTML file for easy sharing and deployment.
-- Typography is loaded from Google Fonts.
-- Decorative and structural visuals are built directly into the page with CSS and inline SVG.
-
-## Author
-
-**Pavan Karthik Tummepalli**  
-Founder · Product Designer · Frontend Developer
+- The original design exploration is preserved in `whitehat-landing.html`.
+- The new product experience is served from `public/index.html`.
+- Leads submitted through the contact form are stored locally in `data/leads.json`.

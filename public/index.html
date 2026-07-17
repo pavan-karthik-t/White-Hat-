@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>White Hat | Earn Your Place at the Pass</title>
+  <meta name="description" content="White Hat is India's professional platform for chefs, restaurants, hotels, caterers, and culinary recruiters to build verified reputations, hire with confidence, and book talent by station.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Anton&family=Archivo:wght@400;500;600;700;800;900&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <header>
+    <nav class="nav wrap">
+      <a class="logo" href="#top" aria-label="White Hat home">
+        <svg class="hat" viewBox="0 0 30 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <path d="M4 22h22v-3H4v3Z" fill="#f2eee2"/>
+          <path d="M6 19c-3-1-4-4-2.4-7 1-2 3-3 4.6-2.6C9 6.6 11.6 4.5 15 4.5s6 2.1 6.8 4.9c1.6-.4 3.6.6 4.6 2.6C28 15 27 18 24 19H6Z" fill="#f2eee2"/>
+        </svg>
+        White<span>Hat</span>
+      </a>
+      <div class="nav-links" id="navLinks">
+        <a href="#search">Find talent</a>
+        <a href="#kitchens">For kitchens</a>
+        <a href="#how">How it works</a>
+        <a href="#learning">Masterclasses</a>
+        <a href="#contact">Contact</a>
+      </div>
+      <div class="nav-actions">
+        <a class="btn btn-outline-light btn-outline" href="#creator">Creator</a>
+        <a class="btn btn-primary" href="#contact">Book a consult</a>
+        <button class="menu-toggle" aria-label="Toggle menu" aria-expanded="false">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+      </div>
+    </nav>
+  </header>
+
+  <main id="main">
+    <section class="hero" id="top">
+      <div class="wrap hero-grid">
+        <span class="eyebrow on-dark" id="heroEyebrow">India's culinary brigade, online</span>
+        <h1 id="heroHeadline">The hat is earned. Not issued.</h1>
+        <p id="heroSubheadline">White Hat is the professional record for India's kitchens: verified chef profiles, station-based hiring, and hourly bookings built for modern hospitality teams.</p>
+        <div class="hero-actions">
+          <a class="btn btn-primary" href="#contact">Build your profile</a>
+          <a class="btn btn-outline-light" href="#search">Hire verified talent</a>
+        </div>
+        <div class="hero-stats" id="heroStats"></div>
+      </div>
+
+      <div class="pass">
+        <div class="wrap pass-head">
+          <div>
+            <div class="pass-label">On the pass right now <span>live tickets</span></div>
+            <p class="pass-copy">Premium Indian hospitality UI direction by Pavan Karthik Tummepalli.</p>
+          </div>
+          <div class="pass-contact">
+            <a href="mailto:pavankarthiktummepalli@gmail.com">pavankarthiktummepalli@gmail.com</a>
+            <a href="tel:+919182982890">+91 91829 82890</a>
+          </div>
+        </div>
+        <div class="pass-track-wrap">
+          <div class="pass-track" id="passTrack"></div>
+        </div>
+      </div>
+    </section>
+
+    <div class="gauge-strip">
+      <div class="gauge-track" id="gaugeTrack"></div>
+    </div>
+
+    <section class="section" id="search">
+      <div class="wrap">
+        <div class="section-head">
+          <div class="rail-rule"><span></span></div>
+          <span class="eyebrow">Search by station</span>
+          <h2>Hire the way a kitchen actually staffs.</h2>
+          <p>The live backend powers this search, so the redesign still works like a real product instead of a static concept.</p>
+        </div>
+        <form class="search-panel" id="filterForm">
+          <div class="search-row search-row-grid">
+            <label>
+              <span>City</span>
+              <select id="cityFilter" name="city">
+                <option value="">All cities</option>
+              </select>
+            </label>
+            <label>
+              <span>Cuisine</span>
+              <select id="cuisineFilter" name="cuisine">
+                <option value="">All cuisines</option>
+              </select>
+            </label>
+            <label>
+              <span>Service type</span>
+              <select id="serviceTypeFilter" name="serviceType">
+                <option value="">All service types</option>
+              </select>
+            </label>
+            <label>
+              <span>Availability</span>
+              <input id="availabilityFilter" name="availability" type="text" placeholder="Example: this week, 48 hours, August">
+            </label>
+          </div>
+          <div class="search-actions">
+            <button class="btn btn-primary" type="submit">Search chefs</button>
+            <button class="btn btn-outline" type="button" id="resetFilters">Reset filters</button>
+          </div>
+        </form>
+      </div>
+    </section>
+
+    <section class="section" id="featured" style="padding-top:0">
+      <div class="wrap">
+        <div class="section-head">
+          <div class="rail-rule"><span></span></div>
+          <span class="eyebrow">Featured on the pass</span>
+          <h2>Profiles built around the work, not the resume.</h2>
+          <p id="resultsMeta">Loading talent data...</p>
+        </div>
+        <div class="chef-grid" id="chefGrid"></div>
+      </div>
+    </section>
+
+    <section class="section kitchens" id="kitchens">
+      <div class="wrap">
+        <div class="split">
+          <div class="reveal">
+            <span class="eyebrow on-dark">For restaurants, hotels and caterers</span>
+            <h2 style="margin:14px 0 16px">Staff the line without the guesswork.</h2>
+            <p>Every role can now be matched against verified history, regional cuisine depth, station fit, and service readiness. That gives Indian hospitality teams a cleaner hiring workflow from shortlist to booking.</p>
+            <ul class="checklist" id="highlightList"></ul>
+            <a class="btn btn-brass" href="#contact">Post a role</a>
+          </div>
+          <div class="panel-mock reveal" id="businessSignals"></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="how">
+      <div class="wrap">
+        <div class="section-head">
+          <div class="rail-rule"><span></span></div>
+          <span class="eyebrow">How it works</span>
+          <h2>From application to service, in four tickets.</h2>
+        </div>
+        <div class="steps">
+          <div class="step reveal">
+            <span class="num">01 • Prep</span>
+            <h4>Build your ticket</h4>
+            <p>Create a profile with cities, cuisines, service types, and experience that employers can verify quickly.</p>
+          </div>
+          <div class="step reveal">
+            <span class="num">02 • Fire</span>
+            <h4>Get discovered</h4>
+            <p>Kitchens filter by the exact qualities they need instead of scanning generic applications.</p>
+          </div>
+          <div class="step reveal">
+            <span class="num">03 • Plate</span>
+            <h4>Interview and trial</h4>
+            <p>Operators review strong profiles first, then move into conversations and service-fit checks.</p>
+          </div>
+          <div class="step reveal">
+            <span class="num">04 • Pass</span>
+            <h4>Book and build trust</h4>
+            <p>Each successful booking adds credibility, making future hiring and discovery faster.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="learning">
+      <div class="wrap">
+        <div class="section-head">
+          <div class="rail-rule"><span></span></div>
+          <span class="eyebrow">Masterclasses and mentorship</span>
+          <h2>Sharpen your knives.</h2>
+          <p>Technique-led classes and reputation-building learning stay connected to the larger hiring ecosystem.</p>
+        </div>
+        <div class="learn-grid" id="courseGrid"></div>
+      </div>
+    </section>
+
+    <section class="section" id="testimonials">
+      <div class="wrap">
+        <div class="section-head">
+          <div class="rail-rule"><span></span></div>
+          <span class="eyebrow">Signals of trust</span>
+          <h2>Operators and chefs need proof, not just branding.</h2>
+        </div>
+        <div class="quote-grid" id="testimonialGrid"></div>
+      </div>
+    </section>
+
+    <section class="section creator-section" id="creator">
+      <div class="wrap creator-grid">
+        <div class="docket creator-card reveal">
+          <span class="docket-no">No. CREATOR</span>
+          <span class="eyebrow">Idea and frontend direction</span>
+          <h2>Pavan Karthik Tummepalli</h2>
+          <p>This implementation keeps the strongest frontend language from your redesign file and connects it back to the live White Hat product flow.</p>
+        </div>
+        <div class="creator-contact reveal">
+          <h3>Contact details</h3>
+          <a href="mailto:pavankarthiktummepalli@gmail.com">pavankarthiktummepalli@gmail.com</a>
+          <a href="tel:+919182982890">+91 91829 82890</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="section contact-section" id="contact">
+      <div class="wrap contact-layout">
+        <div class="section-head contact-head">
+          <div class="rail-rule"><span></span></div>
+          <span class="eyebrow">Join the platform</span>
+          <h2>Capture real demand from both sides of the marketplace.</h2>
+          <p>Chef applications, hiring requests, partnerships, and masterclass interest still submit directly to the backend data store.</p>
+        </div>
+
+        <form class="lead-form docket" id="leadForm">
+          <span class="docket-no">No. INTAKE</span>
+          <label>
+            <span>Name</span>
+            <input name="name" type="text" required>
+          </label>
+          <label>
+            <span>Email</span>
+            <input name="email" type="email" required>
+          </label>
+          <label>
+            <span>Role</span>
+            <select name="role" required>
+              <option value="">Select role</option>
+              <option value="Chef">Chef</option>
+              <option value="Restaurant">Restaurant</option>
+              <option value="Hotel">Hotel</option>
+              <option value="Event Host">Event Host</option>
+              <option value="Partner">Partner</option>
+            </select>
+          </label>
+          <label>
+            <span>Interest</span>
+            <select name="interest" required>
+              <option value="">Select interest</option>
+              <option value="Hiring talent">Hiring talent</option>
+              <option value="Joining as a chef">Joining as a chef</option>
+              <option value="Masterclasses">Masterclasses</option>
+              <option value="Partnership">Partnership</option>
+            </select>
+          </label>
+          <label class="full-width">
+            <span>Message</span>
+            <textarea name="message" rows="4" placeholder="Share the city, culinary brief, hiring timeline, or type of collaboration you want."></textarea>
+          </label>
+          <button class="btn btn-primary" type="submit">Submit interest</button>
+          <p class="form-status" id="formStatus" aria-live="polite"></p>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="wrap">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a class="logo" href="#top" aria-label="White Hat home">
+            <svg class="hat" viewBox="0 0 30 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+              <path d="M4 22h22v-3H4v3Z" fill="#f2eee2"/>
+              <path d="M6 19c-3-1-4-4-2.4-7 1-2 3-3 4.6-2.6C9 6.6 11.6 4.5 15 4.5s6 2.1 6.8 4.9c1.6-.4 3.6.6 4.6 2.6C28 15 27 18 24 19H6Z" fill="#f2eee2"/>
+            </svg>
+            White<span>Hat</span>
+          </a>
+          <p>India's professional platform for chefs, kitchens, and culinary recruiters to build verified reputations and hire with confidence.</p>
+        </div>
+        <div>
+          <h3>Platform</h3>
+          <ul>
+            <li><a href="#featured">Featured chefs</a></li>
+            <li><a href="#search">Find talent</a></li>
+            <li><a href="#learning">Masterclasses</a></li>
+          </ul>
+        </div>
+        <div>
+          <h3>For business</h3>
+          <ul>
+            <li><a href="#kitchens">Restaurant hiring</a></li>
+            <li><a href="#search">Hourly bookings</a></li>
+            <li><a href="#contact">Hotel staffing</a></li>
+          </ul>
+        </div>
+        <div>
+          <h3>Creator</h3>
+          <ul>
+            <li><a href="mailto:pavankarthiktummepalli@gmail.com">pavankarthiktummepalli@gmail.com</a></li>
+            <li><a href="tel:+919182982890">+91 91829 82890</a></li>
+            <li><a href="/api/health">API health</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>© 2026 White Hat. All rights reserved.</span>
+        <span>Frontend direction by Pavan Karthik Tummepalli.</span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="/app.js" defer></script>
+</body>
+</html>

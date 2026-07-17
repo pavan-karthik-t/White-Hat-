@@ -1,0 +1,32 @@
+[
+  {
+    "id": "mc-chettinad-craft",
+    "title": "Chettinad Masala Craft",
+    "instructor": "Lakshmi Iyer",
+    "duration": "42 minutes",
+    "format": "On-demand",
+    "level": "Intermediate",
+    "enrolled": 1860,
+    "summary": "Build intensity, aroma, and regional fidelity without muddying the finish of the dish."
+  },
+  {
+    "id": "mc-private-dining-systems",
+    "title": "Private Dining Service Systems",
+    "instructor": "Meera Menon",
+    "duration": "6 weeks",
+    "format": "Cohort",
+    "level": "Advanced",
+    "enrolled": 240,
+    "summary": "Plan staffing, pacing, plating, and guest flow for premium home dining and intimate event service."
+  },
+  {
+    "id": "mc-menu-launch-playbook",
+    "title": "Dessert Menu Launch Playbook",
+    "instructor": "Zoya Khan",
+    "duration": "58 minutes",
+    "format": "Workshop",
+    "level": "Beginner to Intermediate",
+    "enrolled": 920,
+    "summary": "Create a menu story, prep rhythm, and plating standard that can survive real service."
+  }
+]
